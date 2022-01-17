@@ -5,7 +5,7 @@ import styles from './InputElement.module.css';
 const InputElement = ({ text, value, type, name, pattern, title, onChange }) => {
   return (
     <div className={styles.block}>
-      <label className={styles.label} htmlFor="name">
+      <label className={styles.label} htmlFor={name}>
         {text}
       </label>
       <input

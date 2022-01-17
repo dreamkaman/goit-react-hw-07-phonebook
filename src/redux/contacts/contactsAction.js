@@ -14,5 +14,3 @@ export const addContactAction = createAction('contacts/add', (name, number) => {
 export const deleteContactAction = createAction('contact/delete', (contacts, id) => {
   return { payload: contacts.filter(contact => contact.id !== id) };
 });
-
-// console.log(addContactAction('Vova', '555555'));
