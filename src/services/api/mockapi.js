@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://61e5892ac14c7a0017124d04.mockapi.io/contacts/contacts1/';
+const BASE_URL = 'https://61e5892ac14c7a0017124d04.mockapi.io/contacts/contacts/';
 
 const getContacts = () =>
   axios({
