@@ -25,15 +25,15 @@ const isLoading = createReducer(false, {
 const error = createReducer(null, {
   [fetchContacts.pending]: () => null,
   [fetchContacts.fulfilled]: () => null,
-  [fetchContacts.error]: (_, action) => action.payload,
+  [fetchContacts.rejected]: (_, action) => action.payload,
 
   [addContact.pending]: () => null,
   [addContact.fulfilled]: () => null,
-  [addContact.error]: (_, action) => action.payload,
+  [addContact.rejected]: (_, action) => action.payload,
 
   [deleteContact.pending]: () => null,
   [deleteContact.fulfilled]: () => null,
-  [deleteContact.error]: (_, action) => action.payload,
+  [deleteContact.rejected]: (_, action) => action.payload,
 });
 
 export const phonebookReducer = combineReducers({

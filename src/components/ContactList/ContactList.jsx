@@ -4,21 +4,22 @@ import Button from '../Button';
 import styles from './ContactList.module.css';
 import { deleteContact } from '../../redux/contacts/contactsOperations';
 
+function getFilteredContacts(state) {
+  const {
+    phoneBook: { contacts },
+    filter,
+  } = state;
+  return contacts.filter(contact => contact.name.toUpperCase().includes(filter.toUpperCase()));
+}
+
 const ContactList = () => {
-  const contacts = useSelector(state => state.phoneBook.contacts);
-  const filter = useSelector(state => state.filter);
+  const filteredContacts = useSelector(getFilteredContacts);
 
   const dispatch = useDispatch();
 
-  if (!contacts.length) {
+  if (!filteredContacts.length) {
     return null;
   }
-
-  function getFilteredContacts(filter, contacts) {
-    return contacts.filter(contact => contact.name.toUpperCase().includes(filter.toUpperCase()));
-  }
-
-  const filteredContacts = getFilteredContacts(filter, contacts);
 
   const elements = filteredContacts.map(({ name, id, phone }) => {
     return (

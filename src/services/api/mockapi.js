@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://61e5892ac14c7a0017124d04.mockapi.io/contacts/contacts/';
+const BASE_URL = 'https://61e5892ac14c7a0017124d04.mockapi.io/contacts/contacts1/';
 
 const getContacts = () =>
   axios({
@@ -8,15 +8,18 @@ const getContacts = () =>
     url: BASE_URL,
   });
 
-const addContact = (name, phone) =>
-  axios({
+const addContact = ({ name, phone }) => {
+  // console.log(phone);
+
+  return axios({
     method: 'post',
     url: BASE_URL,
     data: {
-      phone,
       name,
+      phone,
     },
   });
+};
 
 const deleteContact = id =>
   axios({

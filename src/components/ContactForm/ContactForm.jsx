@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { fetchContacts, addContact } from '../../redux/contacts/contactsOperations.js';
-import { mockapi } from '../../services/api/index.js';
 
 import InputElement from './InputElement';
 import Button from '../Button';
@@ -34,8 +33,10 @@ function ContactForm() {
 
       return;
     }
+    console.log('name', name);
+    console.log('phone', phone);
 
-    dispatch(addContact(name, phone));
+    dispatch(addContact({ name, phone }));
 
     setContact({ name: '', phone: '' });
   };
