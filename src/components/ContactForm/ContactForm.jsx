@@ -36,7 +36,6 @@ function ContactForm() {
     }
 
     dispatch(addContact(name, phone));
-    mockapi.getContacts();
 
     setContact({ name: '', phone: '' });
   };
