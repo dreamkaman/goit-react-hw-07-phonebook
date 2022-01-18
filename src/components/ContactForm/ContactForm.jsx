@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { addContactAction } from '../../redux/contacts/contactsAction.js';
+import { fetchContacts, addContact } from '../../redux/contacts/contactsOperations.js';
+import { mockapi } from '../../services/api/index.js';
 
 import InputElement from './InputElement';
 import Button from '../Button';
@@ -10,11 +11,15 @@ import styles from './ContactForm.module.css';
 
 function ContactForm() {
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.items);
+  const contacts = useSelector(state => state.phoneBook.contacts);
 
-  const [contact, setContact] = useState({ name: '', number: '' });
+  const [contact, setContact] = useState({ name: '', phone: '' });
 
-  const { name, number } = contact;
+  const { name, phone } = contact;
+
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
   const handleChange = event => {
     const key = event.target.name;
@@ -30,8 +35,10 @@ function ContactForm() {
       return;
     }
 
-    dispatch(addContactAction(name, number));
-    setContact({ name: '', number: '' });
+    dispatch(addContact(name, phone));
+    mockapi.getContacts();
+
+    setContact({ name: '', phone: '' });
   };
 
   function isContactExist(name) {
@@ -50,10 +57,10 @@ function ContactForm() {
         onChange={handleChange}
       />
       <InputElement
-        value={number}
+        value={phone}
         text="Number"
         type="tel"
-        name="number"
+        name="phone"
         pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
         title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
         onChange={handleChange}
