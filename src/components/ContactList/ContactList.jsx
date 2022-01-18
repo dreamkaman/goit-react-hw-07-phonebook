@@ -3,17 +3,18 @@ import { useSelector, useDispatch } from 'react-redux';
 import Button from '../Button';
 import styles from './ContactList.module.css';
 import { deleteContact } from '../../redux/contacts/contactsOperations';
+import { contactsSelectors } from '../../redux/contacts/contactsSelector';
 
-function getFilteredContacts(state) {
-  const {
-    phoneBook: { contacts },
-    filter,
-  } = state;
-  return contacts.filter(contact => contact.name.toUpperCase().includes(filter.toUpperCase()));
-}
+// function getFilteredContacts(state) {
+//   const {
+//     phoneBook: { contacts },
+//     filter,
+//   } = state;
+//   return contacts.filter(contact => contact.name.toUpperCase().includes(filter.toUpperCase()));
+// }
 
 const ContactList = () => {
-  const filteredContacts = useSelector(getFilteredContacts);
+  const filteredContacts = useSelector(contactsSelectors.getFilteredContacts);
 
   const dispatch = useDispatch();
 

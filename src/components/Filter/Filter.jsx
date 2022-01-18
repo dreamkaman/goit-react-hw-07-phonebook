@@ -1,11 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { changeFilterAction } from '../../redux/filter/filterAction';
+import { filterSelectors } from '../../redux/filter/filterSelectors';
 
 import styles from './Filter.module.css';
 
 const Filter = () => {
   const dispatch = useDispatch();
-  const filter = useSelector(state => state.filter);
+  const filter = useSelector(filterSelectors.getFilter);
 
   const handleChange = event => {
     dispatch(changeFilterAction(event.target.value));

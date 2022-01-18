@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { fetchContacts, addContact } from '../../redux/contacts/contactsOperations.js';
+import { contactsSelectors } from '../../redux/contacts/contactsSelector.js';
 
 import InputElement from './InputElement';
 import Button from '../Button';
@@ -10,7 +11,7 @@ import styles from './ContactForm.module.css';
 
 function ContactForm() {
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.phoneBook.contacts);
+  const contacts = useSelector(contactsSelectors.getAllContacts);
 
   const [contact, setContact] = useState({ name: '', phone: '' });
 
@@ -33,8 +34,6 @@ function ContactForm() {
 
       return;
     }
-    console.log('name', name);
-    console.log('phone', phone);
 
     dispatch(addContact({ name, phone }));
 
